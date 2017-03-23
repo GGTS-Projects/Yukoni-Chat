@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  Platform,
-  StatusBar,
-} from 'react-native';
+import {Platform, StatusBar} from 'react-native';
 
-import { Router, Scene } from 'react-native-router-flux';
+import {Router, Scene} from 'react-native-router-flux';
 import Layout from './libs/Layout';
 import Store from './libs/Store';
 import Backend from './libs/Backend';
@@ -27,8 +24,18 @@ export default class App extends React.Component {
       <Router>
         <Scene key="root">
           <Scene key="home" hideNavBar={true} component={Home}/>
-          <Scene key="channels" hideNavBar={false} component={Channels} title='CHANNELS' {...Layout.navigationBar}/>
-          <Scene key="chat" hideNavBar={false} component={Chat} title='' {...Layout.navigationBar}/>
+          <Scene
+            key="channels"
+            hideNavBar={false}
+            component={Channels}
+            title='CHANNELS'
+            {...Layout.navigationBar}/>
+          <Scene
+            key="chat"
+            hideNavBar={false}
+            component={Chat}
+            title=''
+            {...Layout.navigationBar}/>
         </Scene>
       </Router>
     );

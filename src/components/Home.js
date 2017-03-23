@@ -24,7 +24,7 @@ export default class Home extends React.Component {
             color: '#FFFFFF',
             fontSize: 16,
             marginLeft: 15,
-            fontFamily: 'Lato-Semibold',
+         
           }}
         >
           Enter your name :
@@ -48,7 +48,7 @@ export default class Home extends React.Component {
             style={{
               fontSize: 19,
               color: '#FFFFFF',
-              fontFamily: 'Lato-Semibold',
+           
               textDecorationLine: 'underline',
             }}
             styleDisabled={{

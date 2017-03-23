@@ -40,7 +40,6 @@ export default {
       color: '#FFFFFF',
       fontSize: 13,
       fontWeight: '600',
-      fontFamily: 'Lato-Semibold',
       lineHeight: 18,
     },
   },
@@ -54,7 +53,6 @@ export default {
         android: 10,
       }),
       marginRight: 15,
-      fontFamily: 'Lato-Semibold',
     },
     placeholderTextColor: '#A89ED1',
     clearButtonMode: 'while-editing',
@@ -64,7 +62,6 @@ export default {
     color: '#FFFFFF',
     fontSize: 18,
     marginLeft: 15,
-    fontFamily: 'Lato-Semibold',
   },
 
 
