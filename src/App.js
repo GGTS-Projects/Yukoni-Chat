@@ -1,43 +1,49 @@
-import React from 'react';
-import {Platform, StatusBar} from 'react-native';
 
-import {Router, Scene} from 'react-native-router-flux';
-import Layout from './libs/Layout';
-import Store from './libs/Store';
-import Backend from './libs/Backend';
+import React, { Component } from 'react';
 
-import Home from './components/Home';
-import Channels from './components/Channels';
-import Chat from './components/Chat';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, connect } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    Backend.setStore(Store);
-    Backend.init();
-    if (Platform.OS === 'ios') {
-      StatusBar.setBarStyle('light-content');
+import ChatUI from './components/ChatUI';
+import LoginUI from './components/LoginUI';
+import rootReducer from './reducers';
+import { fetchMessages } from './actions';
+
+
+const loggerMiddleware = createLogger();
+
+const store = createStore(
+    rootReducer,
+    applyMiddleware(
+        thunkMiddleware,
+        //loggerMiddleware
+    )
+);
+
+import { Examples } from '@shoutem/ui';
+
+const LoginOrChat = connect(
+    (state) => ({
+        authorized: state.user.authorized
+    })
+)(({ authorized }) => {
+    if (authorized) {
+        return (<ChatUI />);
+    }else{
+        return (<LoginUI />);
     }
-  }
-  render() {
-    return (
-      <Router>
-        <Scene key="root">
-          <Scene key="home" hideNavBar={true} component={Home}/>
-          <Scene
-            key="channels"
-            hideNavBar={false}
-            component={Channels}
-            title='CHANNELS'
-            {...Layout.navigationBar}/>
-          <Scene
-            key="chat"
-            hideNavBar={false}
-            component={Chat}
-            title=''
-            {...Layout.navigationBar}/>
-        </Scene>
-      </Router>
-    );
-  }
+});
+
+class App extends Component {
+    render() {
+        return (
+            <Provider store={store}>
+               <LoginOrChat />
+            </Provider>
+        );
+    }
 }
+
+export default App;
